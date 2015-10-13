@@ -1,0 +1,22 @@
+<ion-view view-title="Nuevo contacto" ng-controller="NuevoContactoCtrl as nc">
+  <ion-content class="padding">
+
+    <form ng-submit="nc.guardarContacto()">
+        <div class="padding">
+          <label class="item item-input">
+            <input type="text" placeholder="Nombre" ng-model="nc.contacto.nombre" />
+            <div on-touch="nc.contacto.nombre=''" ng-show="nc.contacto.nombre.length" class="clear-text ion-android-close" ></div>
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="Teléfono" ng-model="nc.contacto.telefono" />
+            <div on-touch="nc.contacto.telefono=''" ng-show="nc.contacto.telefono.length" class="clear-text ion-android-close" ></div>
+          </label>
+        </div>
+        <div class="padding">
+          <button type="submit" class="button button-block button-positive">Guardar contacto</button>
+        </div>
+    </form>
+
+    
+  </ion-content>
+</ion-view>

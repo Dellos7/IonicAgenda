@@ -1,0 +1,37 @@
+<ion-view view-title="Agenda" ng-controller="ContactsCtrl as vm" cache-view="false">
+
+    <ion-content scroll="false">
+        <ion-toggle ng-model="vm.permitirBorrado">Permitir borrado</ion-toggle>
+
+        <label class="item item-input">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="search" placeholder="Búsqueda" ng-model="vm.filtro" />
+          <div on-touch="vm.filtro=''" ng-show="vm.filtro.length" class="clear-text ion-android-close" ></div>
+        </label>
+
+        <ion-content class="padding has-header has-subheader">
+
+          <ion-refresher
+                  on-refresh="vm.doRefresh()"
+                  pulling-text="Baja para actualizar..."
+                  refreshing-text="¡Actualizando!"
+                  refreshing-icon="ion-loading-c">
+          </ion-refresher>
+
+          <ion-list class="padding">
+            <ion-item collection-repeat="contacto in vm.contactos | filter: vm.filtro | orderBy: vm.ordenContactos : vm.ordenAsc">
+            <div class="left">
+              <h2>{{contacto.displayName}}</h2>
+              <p>{{contacto.phoneNumbers[0].value}}</p>
+            </div>
+            <div class="buttons right">
+              <a ng-click="vm.borrarContacto(contacto.id)" ng-show="vm.permitirBorrado"><button class="button button-icon icon ion-trash-a"></button></a>
+              <a ng-href="tel: {{contacto.phoneNumbers[0].value}}"><button class="button button-icon icon ion-ios-telephone"></button></a>
+            </div>
+            <div class="clear-both"></div>
+            </ion-item>
+          </ion-list>
+
+        </ion-content>
+    </ion-content>
+</ion-view>
